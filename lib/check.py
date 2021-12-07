@@ -7,14 +7,18 @@ class Check:
         self.state = state.state
         self.env_n = len(state.state)
 
-    def proc(self):
+    def max(self):
+        return int(self.env_n * (self.env_n-1) /2)
+    def occures(self):
         is_safe = False
+        max = self.max() 
+        occures = 0
         for index in range(0, len(self.state)):
             item = self.state[index]
-
-
-            # if item in tmp:
-            #     return  False
             for i in range(index + 1, len(self.state)):
-                is_safe = item == self.state[i] or abs(item-self.state[i]) == i-index or is_safe
-        return is_safe
+                occures = (
+                    occures + 1
+                    if item == self.state[i] or abs(item - self.state[i]) == i - index
+                    else occures
+                )
+        return occures
